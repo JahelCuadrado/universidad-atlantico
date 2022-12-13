@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
 class Titulacion(models.Model):
     titulo = models.CharField(max_length=150, blank=True)
     descripcion = models.CharField(max_length=350, blank=True)
