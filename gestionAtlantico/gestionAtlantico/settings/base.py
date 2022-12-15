@@ -51,7 +51,9 @@ LOCAL_APPS = (
     'applications.reservas',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'drf_yasg',
+)
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
