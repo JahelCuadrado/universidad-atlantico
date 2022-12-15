@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 
 class Titulacion(models.Model):
@@ -16,7 +17,6 @@ class User(AbstractUser):
         ('A', 'ALUMNO'),
         ('P', 'PROFESOR'),
     )
-    
     
     first_name = models.CharField(
         'Nombre', 
@@ -41,11 +41,11 @@ class User(AbstractUser):
         max_length=9, 
         blank=True
         )
-
     
     email_institucional = models.EmailField(
         max_length=150, 
-        blank=True
+        blank=True,
+        unique=True
         )
     
     email_personal = models.EmailField(
@@ -58,15 +58,22 @@ class User(AbstractUser):
         blank=True
         )
     
-    titulacion = models.ForeignKey(Titulacion, on_delete=models.CASCADE, 
-        blank=True, null=True)
+    titulacion = models.ForeignKey(
+        Titulacion, 
+        on_delete=models.CASCADE, 
+        blank=True, 
+        null=True)
     
     curso = models.PositiveIntegerField(blank=True)
     
+    USERNAME_FIELD = 'email_institucional'
+    REQUIRED_FIELDS = []
 
 
     
 
     
     #TODO campo de reservas
-    #TODO curso y titulación se escribe o se coge de otra tablaNP
+    #TODO curso y titulación se escribe o se coge de otra tabla
+    
+    #email identificativo, el personal o el institucional
