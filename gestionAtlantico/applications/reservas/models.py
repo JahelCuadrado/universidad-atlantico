@@ -34,6 +34,15 @@ class Material(models.Model):
         auto_now=True, 
         auto_now_add=False)
     
+    disponible = models.BooleanField("Disponible", default=True)
+    
+    def __str__(self):
+        return self.nombre
+    
+    class Meta:
+        verbose_name = 'Material'
+        verbose_name_plural = 'Materiales'
+    
     
     
 class Clase(models.Model):
@@ -62,16 +71,25 @@ class Clase(models.Model):
         auto_now=True, 
         auto_now_add=False)
     
+    disponible = models.BooleanField("Disponible", default=True)
+    
+    def __str__(self):
+        return self.nombre + ' - ' + self.numero_clase
+    
+    class Meta:
+        verbose_name = 'Clase'
+        verbose_name_plural = 'Clases'
+    
     
     
 class Equipo(models.Model):
     
     nombre = models.CharField(
-        "Nombre del material", 
+        "Nombre del equipo", 
         max_length=50)
     
     descripcion = models.CharField(
-        "Descripción del material", 
+        "Descripción del equipo", 
         max_length=350)
     
     numero_clase = models.ForeignKey(
@@ -84,14 +102,19 @@ class Equipo(models.Model):
         unique=True)
     
     fecha_alta = models.DateField(
-        "Fecha de alta del material", 
+        "Fecha de alta del equipo", 
         auto_now=False, 
         auto_now_add=True)
     
     fecha_modificacion = models.DateField(
-        "Fecha de alta del material", 
+        "Fecha de alta del equipo", 
         auto_now=True, 
         auto_now_add=False)
+    
+    disponible = models.BooleanField("Disponible", default=True)
+    
+    def __str__(self):
+        return self.nombre + ' - ' + str(self.numero_clase) + ', equipo:' + self.numero_equipo
     
 
 
@@ -99,7 +122,8 @@ class Reservas(models.Model):
     
     usuario = models.ForeignKey(
         User, 
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE,
+        related_name="usuario_reserva")
     
     motivo_prestamo = models.CharField(
         "Motivo del préstamo", 
@@ -119,15 +143,22 @@ class Reservas(models.Model):
     equipo = models.ForeignKey(
         Equipo, 
         on_delete=models.CASCADE,
-        blank=True)
+        blank=True,
+        null=True)
     
     clase = models.ForeignKey(
         Clase, 
         on_delete=models.CASCADE,
-        blank=True)
+        blank=True,
+        null=True)
     
     material = models.ForeignKey(
         Material, 
         on_delete=models.CASCADE,
-        blank=True)
+        blank=True,
+        null=True)
+    
+    class Meta:
+        verbose_name = 'Reserva'
+        verbose_name_plural = 'Reservas'
     

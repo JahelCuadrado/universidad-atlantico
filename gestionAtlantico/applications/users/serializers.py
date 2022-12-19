@@ -5,7 +5,10 @@ from applications.users.models import User #TODO 3 registro usuarios
 class UserRegisterSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ('__all__')
+		fields = (
+			'email_institucional',
+			'password'
+		)
      
 	def create(self, validated_data):
 		password = validated_data.pop('password', None)

@@ -9,6 +9,10 @@ class Titulacion(models.Model):
     titulo = models.CharField(max_length=150, blank=True)
     descripcion = models.CharField(max_length=350, blank=True)
     duracion = models.PositiveIntegerField(blank=True)
+    
+    class Meta:
+        verbose_name = 'Titulación'
+        verbose_name_plural = 'Titulaciones'
 
 
 class User(AbstractUser):
@@ -32,48 +36,42 @@ class User(AbstractUser):
         'Alumno o profesor',
         choices=TYPE_CHOICE, 
         max_length=1,
-        blank=True
         )
     
     nif = models.CharField(
         'NIF',
         unique=True, 
         max_length=9, 
-        blank=True
         )
     
     email_institucional = models.EmailField(
         max_length=150, 
-        blank=True,
         unique=True
         )
     
     email_personal = models.EmailField(
         max_length=150, 
-        blank=True
+        unique=True
         )
     
     telefono = models.CharField(
         max_length=9,
-        blank=True
+        unique=True
         )
     
     titulacion = models.ForeignKey(
         Titulacion, 
-        on_delete=models.CASCADE, 
-        blank=True, 
-        null=True)
+        on_delete=models.CASCADE)
     
-    curso = models.PositiveIntegerField(blank=True)
+    curso = models.PositiveIntegerField()
+    
+    reservas = models.ManyToManyField(
+        'reservas.Reservas', 
+        related_name="reservas_de_usuario")
     
     USERNAME_FIELD = 'email_institucional'
-    REQUIRED_FIELDS = []
-
-
+    REQUIRED_FIELDS = ['username',]
     
-
-    
-    #TODO campo de reservas
-    #TODO curso y titulación se escribe o se coge de otra tabla
-    
-    #email identificativo, el personal o el institucional
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'

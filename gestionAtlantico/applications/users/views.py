@@ -13,5 +13,5 @@ class RegisterView(APIView):
 			return Response(serializer.data)
      
 		print('Registrando...')
-		return Response( serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
