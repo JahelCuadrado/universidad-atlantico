@@ -9,6 +9,8 @@ class Material(models.Model):
         "Nombre del material", 
         max_length=50)
     
+    imagen = models.ImageField(upload_to='material/', null=True)
+    
     descripcion = models.CharField(
         "Descripción del material", 
         max_length=350)
