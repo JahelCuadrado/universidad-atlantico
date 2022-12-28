@@ -40,10 +40,8 @@ class ReservasAdmin(admin.ModelAdmin):
         'fecha_reserva',
         'fecha_devolucion',
         'devuelto',
-        'equipo',
-        'clase',
-        'material',
     )
+    filter_horizontal = ('equipo', 'clase', 'material',)
 
 admin.site.register(Material, MaterialAdmin)
 admin.site.register(Clase, ClaseAdmin)

@@ -55,12 +55,14 @@ LOCAL_APPS = (
 THIRD_PARTY_APPS = (
     'drf_yasg',
     'rest_framework',
-    
+    'corsheaders',
 )
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +70,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+	"http://localhost:4200",
+	"http://localhost",
 ]
 
 ROOT_URLCONF = 'gestionAtlantico.urls'
@@ -144,6 +151,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
 	'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
-	'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7)
+	'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
 }
 

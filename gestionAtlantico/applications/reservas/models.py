@@ -32,7 +32,7 @@ class Material(models.Model):
         auto_now_add=True)
     
     fecha_modificacion = models.DateField(
-        "Fecha de alta del material", 
+        "Fecha de modificación del material", 
         auto_now=True, 
         auto_now_add=False)
     
@@ -48,6 +48,8 @@ class Material(models.Model):
     
     
 class Clase(models.Model):
+    
+    imagen = models.ImageField(upload_to='clases/', null=True)
     
     nombre = models.CharField(
         "Nombre de la clase", 
@@ -85,6 +87,8 @@ class Clase(models.Model):
     
     
 class Equipo(models.Model):
+    
+    imagen = models.ImageField(upload_to='equipos/', null=True)
     
     nombre = models.CharField(
         "Nombre del equipo", 
@@ -142,23 +146,17 @@ class Reservas(models.Model):
     devuelto = models.BooleanField(
         "Ha sido devuelto")
     
-    equipo = models.ForeignKey(
+    equipo = models.ManyToManyField(
         Equipo, 
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True)
+        blank=True)
     
-    clase = models.ForeignKey(
+    clase = models.ManyToManyField(
         Clase, 
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True)
+        blank=True)
     
-    material = models.ForeignKey(
+    material = models.ManyToManyField(
         Material, 
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True)
+        blank=True)
     
     class Meta:
         verbose_name = 'Reserva'
