@@ -4,6 +4,7 @@ from .models import User, Titulacion
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'nombre_completo',
         'tipo',
         'email_institucional',

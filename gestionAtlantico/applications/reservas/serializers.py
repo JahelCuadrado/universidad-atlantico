@@ -23,4 +23,13 @@ class EquipoSerializer(serializers.ModelSerializer):
 class ReservasSerializer(serializers.ModelSerializer):
 		class Meta:
 				model = Reservas
-				fields = ('__all__')
+				fields = (
+						'id',
+						'usuario',
+						'motivo_prestamo',
+						'fecha_devolucion',
+						'devuelto',
+						'equipo',
+						'clase',
+						'material',
+        				)
