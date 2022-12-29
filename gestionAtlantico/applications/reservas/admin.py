@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Material, Clase, Equipo, Reservas
+from .serializers import ReservasSerializer
+from django.contrib import messages
 
 # Register your models here.
 
@@ -59,6 +61,13 @@ class ReservasAdmin(admin.ModelAdmin):
         for reserva in queryset:
             disponibles(reserva.id)
         queryset.delete()
+        
+    def save_model(self, request, obj, form, change):
+        serializer = ReservasSerializer(data=request.POST)
+        if serializer.is_valid(raise_exception=True):
+            pass
+        else:
+            self.message_user(request, 'Error', messages.ERROR)
     
     
 def disponibles(id):
