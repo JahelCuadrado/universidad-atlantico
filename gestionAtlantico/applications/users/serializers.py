@@ -13,7 +13,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 			'email_personal',
 			'telefono',
 			'titulacion',
-			'curso'
+			'curso',
+			'password',
+			'tipo'
 		)
      
 	def create(self, validated_data):
@@ -29,6 +31,7 @@ class UserTitulacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Titulacion
         fields = (
+            'id',
 			'titulo',
 			'descripcion',
 			'duracion'
