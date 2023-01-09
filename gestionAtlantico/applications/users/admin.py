@@ -4,8 +4,8 @@ from .models import User, Titulacion
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
         'nombre_completo',
+        'id',
         'tipo',
         'email_institucional',
     )
@@ -17,6 +17,7 @@ class UserAdmin(admin.ModelAdmin):
 class TitulacionAdmin(admin.ModelAdmin):
     list_display = (
         'titulo',
+        'id',
         'duracion_titulo',
     )
     

@@ -32,8 +32,8 @@ class ClaseAdmin(admin.ModelAdmin):
     
 class EquipoAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
         'nombre',
+        'id',
         'numero_clase',
         'numero_equipo',
         'fecha_alta',
@@ -45,8 +45,8 @@ class EquipoAdmin(admin.ModelAdmin):
     
 class ReservasAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
         'usuario',
+        'id',
         'fecha_reserva',
         'fecha_devolucion',
         'devuelto',

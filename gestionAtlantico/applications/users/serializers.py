@@ -1,13 +1,19 @@
 from rest_framework import serializers
-from applications.users.models import User #TODO 3 registro usuarios
+from applications.users.models import User, Titulacion
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
 		fields = (
+			'first_name',
+   			'last_name',
+			'nif',
 			'email_institucional',
-			'password'
+			'email_personal',
+			'telefono',
+			'titulacion',
+			'curso'
 		)
      
 	def create(self, validated_data):
@@ -17,3 +23,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 			instance.set_password(password)
 		instance.save()
 		return instance
+
+
+class UserTitulacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Titulacion
+        fields = (
+			'titulo',
+			'descripcion',
+			'duracion'
+		)
