@@ -5,6 +5,8 @@ from .serializers import UserRegisterSerializer, UserTitulacionSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from applications.users.models import Titulacion
+from rest_framework.permissions import IsAuthenticated
+from .serializers import UserSerializer
 
 
 # Create your views here.
@@ -24,3 +26,10 @@ class TitulacionView(ListAPIView):
     serializer_class = UserTitulacionSerializer
     def get_queryset(self):
         return Titulacion.objects.all()
+    
+    
+class UserView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
